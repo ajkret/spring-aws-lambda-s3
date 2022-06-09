@@ -1,0 +1,5 @@
+spring:
+  cloud:
+    function:
+      scan:
+        packages: com.dersommer.lambda.demo.functions
