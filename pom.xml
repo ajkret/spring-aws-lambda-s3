@@ -15,11 +15,12 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
-        <spring-cloud.version>2021.0.3</spring-cloud.version>
-        <spring-boot-thin.version>1.0.28.RELEASE</spring-boot-thin.version>
+        <spring-cloud-function.version>3.2.4</spring-cloud-function.version>
         <aws-sdk-lambda.version>1.2.1</aws-sdk-lambda.version>
         <aws-sdk-s3.version>1.12.235</aws-sdk-s3.version>
         <aws-lambda-events.version>3.11.0</aws-lambda-events.version>
+        <aws-lambda-log4j2.version>1.5.1</aws-lambda-log4j2.version>
+        <start-class>com.dersommer.lambda.demo.AwsLambdaS3Application</start-class>
     </properties>
     <dependencies>
         <dependency>
@@ -27,18 +28,18 @@
             <artifactId>spring-cloud-function-adapter-aws</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-function-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-lambda-java-core</artifactId>
             <version>${aws-sdk-lambda.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.amazonaws</groupId>
@@ -49,7 +50,11 @@
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-lambda-java-events</artifactId>
             <version>${aws-lambda-events.version}</version>
-            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-lambda-java-log4j2</artifactId>
+            <version>${aws-lambda-log4j2.version}</version>
         </dependency>
 
         <dependency>
@@ -67,8 +72,8 @@
         <dependencies>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
+                <artifactId>spring-cloud-function-dependencies</artifactId>
+                <version>${spring-cloud-function.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -85,25 +90,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework.boot.experimental</groupId>
-                        <artifactId>spring-boot-thin-maven-plugin</artifactId>
-                        <version>${spring-boot-thin.version}</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <configuration>
@@ -114,5 +100,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

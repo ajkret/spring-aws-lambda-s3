@@ -1,5 +1,4 @@
-spring:
-  cloud:
-    function:
-      scan:
-        packages: com.dersommer.lambda.demo.functions
+logging:
+  level:
+    org.springframework: WARN
+    com.dersommer: DEBUG
