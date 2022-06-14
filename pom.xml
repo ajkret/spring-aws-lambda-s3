@@ -81,6 +81,7 @@
     </dependencyManagement>
 
     <build>
+        <finalName>aws-s3-lambda</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
